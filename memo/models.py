@@ -14,13 +14,11 @@ class Memorandum(models.Model):
     destinatario = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="memorado_para"
     )
-    remitente = models.OneToOneField(
+    remitente = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="memorado_por"
     )
-    copia_destinatario = models.ForeignKey(
+    copia_destinatario = models.ManyToManyField(
         User,
-        on_delete=models.CASCADE,
-        null=True,
         blank=True,
         related_name="memorado_como_copia",
     )
@@ -28,7 +26,7 @@ class Memorandum(models.Model):
     fecha = models.DateField()
     cuerpo = models.TextField()
     cierre = models.TextField()
-    tipo = models.OneToOneField(Tipo_memo, on_delete=models.CASCADE)
+    tipo = models.ForeignKey(Tipo_memo, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.asunto} - {self.fecha}"
