@@ -72,7 +72,7 @@ cover/
 *.mo
 
 # Django stuff:
-
+memo/migrations 
 # Flask stuff:
 instance/
 .webassets-cache
