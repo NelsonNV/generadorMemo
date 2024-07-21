@@ -9,6 +9,8 @@ class Tipo_memo(models.Model):
     def __str__(self):
         return f"{self.nombre}"
 
+    objects = models.Manager()
+
 
 class Memorandum(models.Model):
     destinatario = models.ForeignKey(
@@ -31,6 +33,10 @@ class Memorandum(models.Model):
     def __str__(self):
         return f"{self.asunto} - {self.fecha}"
 
+    objects = models.Manager()
+
 
 class Documento(models.Model):
     documento = models.FileField()
+
+    objects = models.Manager()
