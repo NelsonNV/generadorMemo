@@ -14,7 +14,9 @@
     <h1 class="title">Formulario</h1>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ form.as_p }}
+      <div class="field">
+        {{ form.as_p }}
+      </div>
       <button type="submit" class="button is-primary">Enviar</button>
     </form>
   </div>
