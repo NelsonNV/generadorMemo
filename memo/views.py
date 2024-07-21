@@ -18,7 +18,8 @@ def formulario_memorandum(request):
                 "Hubo un error al guardar el memorandum. Por favor, corrige los errores e inténtalo de nuevo.",
             )
     else:
-        form = MemorandumForm()
+        usuario_actual = request.user if request.user.is_authenticated else None
+        form = MemorandumForm(initial={"remitente": usuario_actual})
     return render(request, "formulario.html", {"form": form})
 
 
