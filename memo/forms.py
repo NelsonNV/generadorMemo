@@ -16,7 +16,8 @@ class MemorandumForm(BaseModelForm):
     copia_destinatario = forms.ModelMultipleChoiceField(
         queryset=User.objects.all(),
         required=False,  # Permite que este campo esté vacío
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.SelectMultiple,
+    )
     fecha = forms.DateField(
         widget=forms.DateInput(
             format="%Y-%m-%d",
