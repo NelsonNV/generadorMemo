@@ -13,9 +13,7 @@ class Tipo_memo(models.Model):
 
 
 class Memorandum(models.Model):
-    destinatario = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="memorado_para"
-    )
+    destinatario = models.ManyToManyField(User, related_name="memorado_para")
     remitente = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="memorado_por"
     )
