@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import MemorandumForm, TipoMemoForm
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,13 @@ def formulario_memorandum(request):
         form = MemorandumForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Memorandum guardado con éxito.")
             return redirect("formulario_memorandum")
+        else:
+            messages.error(
+                request,
+                "Hubo un error al guardar el memorandum. Por favor, corrige los errores e inténtalo de nuevo.",
+            )
     else:
         form = MemorandumForm()
     return render(request, "formulario.html", {"form": form})
@@ -21,7 +28,13 @@ def formulario_tipo_memo(request):
         form = TipoMemoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, "Tipo de memorandum guardado con éxito.")
             return redirect("formulario_tipo_memo")
+        else:
+            messages.error(
+                request,
+                "Hubo un error al guardar el tipo de memorandum. Por favor, corrige los errores e inténtalo de nuevo.",
+            )
     else:
         form = TipoMemoForm()
     return render(request, "formulario.html", {"form": form})
