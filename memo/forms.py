@@ -12,14 +12,14 @@ class BaseModelForm(forms.ModelForm):
             field.widget.attrs.update({"class": "input"})
 
 
-class MemorandumForm(forms.ModelForm):
+class MemorandumForm(BaseModelForm):
     copia_destinatario = forms.ModelMultipleChoiceField(
         queryset=User.objects.all(),
         required=False,  # Permite que este campo esté vacío
         widget=forms.CheckboxSelectMultiple,
     )
 
-    class Meta:
+    class Meta(BaseModelForm.Meta):
         model = Memorandum
         fields = [
             "destinatario",
