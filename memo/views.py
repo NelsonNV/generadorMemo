@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .forms import MemorandumForm, TipoMemoForm  # Importa los formularios necesarios
+from .forms import MemorandumForm, TipoMemoForm
 from django.contrib.auth.decorators import login_required
 
 
