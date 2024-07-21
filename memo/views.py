@@ -9,9 +9,7 @@ def formulario_memorandum(request):
         form = MemorandumForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(
-                "success"
-            )  # Redirige a una página de éxito o a donde quieras
+            return redirect("formulario_memorandum")
     else:
         form = MemorandumForm()
     return render(request, "formulario.html", {"form": form})
@@ -23,9 +21,7 @@ def formulario_tipo_memo(request):
         form = TipoMemoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect(
-                "success"
-            )  # Redirige a una página de éxito o a donde quieras
+            return redirect("formulario_tipo_memo")
     else:
         form = TipoMemoForm()
     return render(request, "formulario.html", {"form": form})
