@@ -17,6 +17,15 @@ class MemorandumForm(BaseModelForm):
         queryset=User.objects.all(),
         required=False,  # Permite que este campo esté vacío
         widget=forms.CheckboxSelectMultiple,
+    fecha = forms.DateField(
+        widget=forms.DateInput(
+            format="%Y-%m-%d",
+            attrs={
+                "type": "date",
+                "class": "input",
+                "placeholder": "Selecciona una fecha",
+            },
+        )
     )
 
     class Meta(BaseModelForm.Meta):
