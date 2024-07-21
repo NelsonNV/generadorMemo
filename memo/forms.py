@@ -13,22 +13,6 @@ class BaseModelForm(forms.ModelForm):
 
 
 class MemorandumForm(BaseModelForm):
-    copia_destinatario = forms.ModelMultipleChoiceField(
-        queryset=User.objects.all(),
-        required=False,  # Permite que este campo esté vacío
-        widget=forms.SelectMultiple,
-    )
-    fecha = forms.DateField(
-        widget=forms.DateInput(
-            format="%Y-%m-%d",
-            attrs={
-                "type": "date",
-                "class": "input",
-                "placeholder": "Selecciona una fecha",
-            },
-        )
-    )
-
     class Meta(BaseModelForm.Meta):
         model = Memorandum
         fields = [
@@ -41,6 +25,31 @@ class MemorandumForm(BaseModelForm):
             "cierre",
             "tipo",
         ]
+        widgets = {
+            "destinatario": forms.SelectMultiple(),
+            "copia_destinatario": forms.SelectMultiple(),
+            "fecha": forms.DateInput(
+                format="%Y-%m-%d",
+                attrs={
+                    "type": "date",
+                    "class": "input",
+                    "placeholder": "Selecciona una fecha",
+                },
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        class_multi_select = "input SelectMultiple"
+        super().__init__(*args, **kwargs)
+        self.fields["copia_destinatario"].widget.attrs.update(
+            {"class": class_multi_select}
+        )
+        self.fields["destinatario"].widget.attrs.update({"class": class_multi_select})
+        self.fields["cuerpo"].widget.attrs.update({"class": "textarea", "rows": "10"})
+        self.fields["cierre"].widget.attrs.update({"class": "textarea", "rows": "2"})
+        self.fields["remitente"].widget.attrs.update(
+            {"disabled": True, "class": "input"}
+        )
 
 
 class TipoMemoForm(BaseModelForm):
